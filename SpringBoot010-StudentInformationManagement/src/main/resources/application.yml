@@ -1,0 +1,14 @@
+student:
+  id: 101
+  name: Ramesh
+  course: Java
+  fee: 45000
+  institue: NareshIT
+  subjects:
+    - Core Java
+    - Advanced Java
+    - Spring Boot
+  marks:
+    Java: 90
+    Spring: 85
+    SQL: 80

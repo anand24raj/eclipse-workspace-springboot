@@ -1,0 +1,14 @@
+
+employee:
+  empId: 501
+  empName: Scott
+  empSalary: 85000
+  department: Development
+  company: TCS
+  skills:
+    - Java
+    - Spring Boot
+    - MySQL
+  projectRatings:
+    BankingProject: A
+    EcommerceProject: B+

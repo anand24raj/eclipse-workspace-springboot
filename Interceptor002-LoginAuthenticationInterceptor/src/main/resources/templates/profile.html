@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+}
+
+h2 {
+	color: green;
+	text-align: center;
+	font-size: 30px;
+}
+
+p {
+	color: brown;
+	text-align: center;
+	font-size: 20px;
+}
+
+.logout {
+	display: block;
+	text-align: center;
+	color: crimson;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.logout:hover {
+	color: darkred;
+	text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+	<div class="profile-container">
+
+		<h2>Welcome To Profile Page!</h2>
+
+		<p>
+			Welcome, <strong class="username" th:text="${username}">User</strong>
+		</p>
+
+		<a class="logout-button" th:href="@{/logout}"> Logout </a>
+
+	</div>
+
+</body>
+</html>
