@@ -1,11 +1,8 @@
 package com.nt.service;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -19,8 +16,11 @@ import jakarta.mail.internet.MimeMessage;
 public class MailService {
 
 	
-	@Autowired
-	JavaMailSender sender;
+	final JavaMailSender sender;
+
+	MailService(JavaMailSender sender) {
+		this.sender = sender;
+	}
 	
 	public void sendOfferLetter(Employee employee) throws MessagingException, FileNotFoundException
 	{

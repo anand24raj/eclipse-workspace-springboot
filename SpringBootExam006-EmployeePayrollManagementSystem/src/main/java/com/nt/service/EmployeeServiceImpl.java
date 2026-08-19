@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.Employee;
@@ -11,8 +10,11 @@ import com.nt.repository.EmployeeRepository;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepository repo;
+	private final EmployeeRepository repo;
+
+	EmployeeServiceImpl(EmployeeRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public Employee addEmployee(Employee emp) {

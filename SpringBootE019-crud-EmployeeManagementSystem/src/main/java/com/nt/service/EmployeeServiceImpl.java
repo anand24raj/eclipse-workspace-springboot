@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.Employee;
@@ -11,8 +10,11 @@ import com.nt.repository.EmployeeRepository;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepository eRepo;
+	private final EmployeeRepository eRepo;
+
+	EmployeeServiceImpl(EmployeeRepository eRepo) {
+		this.eRepo = eRepo;
+	}
 
     // save() method is used to add single employee
     @Override

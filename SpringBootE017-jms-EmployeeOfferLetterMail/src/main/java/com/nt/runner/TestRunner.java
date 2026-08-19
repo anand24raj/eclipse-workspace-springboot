@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +10,11 @@ import com.nt.service.MailService;
 @Component
 public class TestRunner implements CommandLineRunner {
 
-	 @Autowired
-	 MailService service;
+	final MailService service;
+
+	TestRunner(MailService service) {
+		this.service = service;
+	}
 	@Override
 	public void run(String... args) throws Exception {
 		

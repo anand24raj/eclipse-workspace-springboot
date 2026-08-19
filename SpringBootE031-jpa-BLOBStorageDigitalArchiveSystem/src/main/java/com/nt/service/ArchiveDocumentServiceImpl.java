@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.ArchiveDocument;
@@ -13,8 +12,11 @@ import com.nt.repository.ArchiveDocumentRepository;
 @Service
 public class ArchiveDocumentServiceImpl implements ArchiveDocumentService {
 
-	@Autowired
-	private ArchiveDocumentRepository repo;
+	private final ArchiveDocumentRepository repo;
+
+	ArchiveDocumentServiceImpl(ArchiveDocumentRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public String saveDocument(String title, String owner, String filePath) {

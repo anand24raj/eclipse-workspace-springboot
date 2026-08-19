@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.Product;
@@ -11,8 +10,11 @@ import com.nt.repo.ProductRepository;
 @Service
 public class ProductService implements IProductService {
 
-    @Autowired
-    ProductRepository repo;
+	final ProductRepository repo;
+
+	ProductService(ProductRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void insertProduct(Product product) {

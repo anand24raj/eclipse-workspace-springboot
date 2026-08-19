@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +10,11 @@ import com.nt.service.MailService;
 @SpringBootApplication
 public class DailyReportApplication implements CommandLineRunner {
 
-    @Autowired
-    private MailService mailService;
+	private final MailService mailService;
+
+	DailyReportApplication(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DailyReportApplication.class, args);

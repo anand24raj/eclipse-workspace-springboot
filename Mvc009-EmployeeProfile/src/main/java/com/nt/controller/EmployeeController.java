@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class EmployeeController {
 
 	@GetMapping("/employee/{id}")
-	public String showEmployee(@PathVariable("id") Integer id, Model model) {
+	public String showEmployee(@PathVariable() Integer id, Model model) {
 
 		model.addAttribute("empId", id);
 		model.addAttribute("empName", "Anand Raj");

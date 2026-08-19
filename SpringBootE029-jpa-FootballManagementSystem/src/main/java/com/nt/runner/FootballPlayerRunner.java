@@ -2,7 +2,6 @@ package com.nt.runner;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +10,11 @@ import com.nt.repository.FootballPlayerRepository;
 @Component
 public class FootballPlayerRunner implements CommandLineRunner {
 
-	@Autowired
-	private FootballPlayerRepository repo;
+	private final FootballPlayerRepository repo;
+
+	FootballPlayerRunner(FootballPlayerRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

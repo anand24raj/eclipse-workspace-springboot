@@ -15,10 +15,7 @@ public class ElectricityBillController {
 	}
 
 	@PostMapping("/calculateBill")
-	public String calculateBill(
-			@RequestParam("customerName") String customerName,
-			@RequestParam("units") int units,
-			Model model) {
+	public String calculateBill(@RequestParam String customerName, @RequestParam int units, Model model) {
 
 		int totalBill = units * 8;
 

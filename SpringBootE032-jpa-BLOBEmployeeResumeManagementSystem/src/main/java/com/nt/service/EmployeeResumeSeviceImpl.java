@@ -1,6 +1,5 @@
 package com.nt.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.EmployeeResume;
@@ -9,8 +8,11 @@ import com.nt.repository.EmployeeResumeRepository;
 @Service
 public class EmployeeResumeSeviceImpl  implements EmployeeResumeSevice{
 
-	@Autowired
-	EmployeeResumeRepository repo;
+	final EmployeeResumeRepository repo;
+
+	EmployeeResumeSeviceImpl(EmployeeResumeRepository repo) {
+		this.repo = repo;
+	}
 	
 	
 	@Override

@@ -62,8 +62,11 @@ public class TravelPackageController {
 	@DeleteMapping("/{id}")
 	public Mono<ResponseEntity<Void>> deletePackage(@PathVariable Integer id) {
 
-		return service.getPackageById(id).flatMap(
-				existingPackage -> service.deletePackage(id).thenReturn(ResponseEntity.noContent().<Void>build()))
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+		return service.getPackageById(id).hasElement().flatMap(exists -> {
+			if (exists) {
+				return service.deletePackage(id).thenReturn(ResponseEntity.noContent().<Void>build());
+			}
+			return Mono.just(ResponseEntity.notFound().<Void>build());
+		});
 	}
 }

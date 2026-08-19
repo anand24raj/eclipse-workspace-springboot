@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +8,11 @@ import com.nt.sbeans.UniversityConfig;
 @Component
 public class UniversityRunner implements CommandLineRunner 
 {	
-	@Autowired
-    UniversityConfig university;
+	final UniversityConfig university;
+
+	UniversityRunner(UniversityConfig university) {
+        this.university = university;
+    }
 
     @Override
     public void run(String... args) throws Exception 

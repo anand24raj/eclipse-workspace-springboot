@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -9,28 +10,57 @@
 
 <style>
 body {
-	font-family: Arial;
-	background: #eef2f7;
+	font-family: Arial, sans-serif;
+	background-color: #f4f6f8;
 	text-align: center;
 	padding-top: 100px;
 }
 
-a {
-	background: #174f91;
+.container {
+	background: white;
+	width: 500px;
+	margin: auto;
+	padding: 40px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #ccc;
+}
+
+.success {
+	color: green;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+h1 {
+	color: #333;
+}
+
+.logout {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 30px;
+	background-color: #dc3545;
 	color: white;
-	padding: 12px 25px;
 	text-decoration: none;
 	border-radius: 5px;
 }
+
+.logout:hover {
+	background-color: #c82333;
+}
 </style>
-
 </head>
-
 <body>
 
-	<h1>Welcome</h1>
+	<h1>Welcome to Home Page</h1>
 
-	<a href="${pageContext.request.contextPath}/login"> Login </a>
+	<p>Login Successful!</p>
+
+	<p>Welcome, ${username}</p>
+
+	<a href="${pageContext.request.contextPath}/logout">
+		<button>Logout</button>
+	</a>
 
 </body>
 </html>

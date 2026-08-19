@@ -3,7 +3,6 @@ package com.nt.runner;
 import java.util.Arrays;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,11 @@ import com.nt.service.EmployeeService;
 @Component
 public class EmployeeRunner implements CommandLineRunner {
 
-	@Autowired
-	private EmployeeService service;
+	private final EmployeeService service;
+
+	EmployeeRunner(EmployeeService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

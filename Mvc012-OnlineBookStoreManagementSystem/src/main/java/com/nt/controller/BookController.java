@@ -1,10 +1,15 @@
 package com.nt.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nt.entity.Book;
 import com.nt.service.BookService;
@@ -15,178 +20,95 @@ import jakarta.validation.Valid;
 @RequestMapping("/book")
 public class BookController {
 
-	private final BookService service;
+	private final BookService bookService;
 
-	public BookController(BookService service) {
-		this.service = service;
+	public BookController(BookService bookService) {
+		this.bookService = bookService;
 	}
 
-	// =========================
-	// Display Active Books
-	// =========================
-	@GetMapping({ "", "/", "/list" })
-	public String showBookList(Model model) {
+	// Display all books
+	@GetMapping("/list")
+	public String listBooks(@RequestParam(defaultValue = "0") int page, Model model) {
 
-		model.addAttribute("books", service.getActiveBooks());
+		int pageSize = 10;
+
+		Page<Book> bookPage = bookService.getAllBooks(page, pageSize);
+
+		model.addAttribute("bookPage", bookPage);
+		model.addAttribute("books", bookPage.getContent());
+		model.addAttribute("keyword", "");
 
 		return "book-list";
 	}
 
-	// =========================
-	// Display Add Form
-	// =========================
-	@GetMapping("/add")
-	public String showAddForm(Model model) {
+	// Show add form
+	@GetMapping("/new")
+	public String showBookForm(Model model) {
 
 		model.addAttribute("book", new Book());
-		model.addAttribute("formTitle", "Add New Book");
-		model.addAttribute("formAction", "/book/save");
 
 		return "book-form";
 	}
 
-	// =========================
-	// Save Book
-	// =========================
+	// Save new book
 	@PostMapping("/save")
-	public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult result, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult result) {
 
 		if (result.hasErrors()) {
-
-			model.addAttribute("formTitle", "Add New Book");
-			model.addAttribute("formAction", "/book/save");
-
 			return "book-form";
 		}
 
-		service.saveBook(book);
-
-		redirectAttributes.addFlashAttribute("successMessage", "Book added successfully.");
+		bookService.saveBook(book);
 
 		return "redirect:/book/list";
 	}
 
-	// =========================
-	// Display Edit Form
-	// =========================
+	// Show edit form
 	@GetMapping("/edit/{id}")
-	public String showEditForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+	public String editBook(@PathVariable Long id, Model model) {
 
-		try {
+		Book book = bookService.getBookById(id);
 
-			model.addAttribute("book", service.getBookById(id));
-			model.addAttribute("formTitle", "Update Book");
-			model.addAttribute("formAction", "/book/update");
+		model.addAttribute("book", book);
 
-			return "book-form";
-
-		} catch (IllegalArgumentException ex) {
-
-			redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-
-			return "redirect:/book/list";
-		}
+		return "book-form";
 	}
 
-	// =========================
-	// Update Book
-	// =========================
+	// Update book
 	@PostMapping("/update")
-	public String updateBook(@Valid @ModelAttribute("book") Book book, BindingResult result, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String updateBook(@Valid @ModelAttribute("book") Book book, BindingResult result) {
 
 		if (result.hasErrors()) {
-
-			model.addAttribute("formTitle", "Update Book");
-			model.addAttribute("formAction", "/book/update");
-
 			return "book-form";
 		}
 
-		try {
-
-			service.updateBook(book);
-
-			redirectAttributes.addFlashAttribute("successMessage", "Book updated successfully.");
-
-		} catch (IllegalArgumentException ex) {
-
-			redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-		}
+		bookService.updateBook(book);
 
 		return "redirect:/book/list";
 	}
 
-	// =========================
-	// Soft Delete
-	// =========================
+	// Delete book
 	@GetMapping("/delete/{id}")
-	public String deleteBook(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+	public String deleteBook(@PathVariable Long id) {
 
-		try {
-
-			service.deleteBook(id);
-
-			redirectAttributes.addFlashAttribute("successMessage", "Book moved to Trash.");
-
-		} catch (IllegalArgumentException ex) {
-
-			redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-		}
+		bookService.deleteBook(id);
 
 		return "redirect:/book/list";
 	}
 
-	// =========================
-	// Trash Page
-	// =========================
-	@GetMapping("/trash")
-	public String showTrash(Model model) {
+	// Search
+	@GetMapping("/search")
+	public String searchBooks(@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "0") int page, Model model) {
 
-		model.addAttribute("books", service.getDeletedBooks());
+		int pageSize = 10;
 
-		return "trash-books";
+		Page<Book> bookPage = bookService.searchBooks(keyword, page, pageSize);
+
+		model.addAttribute("bookPage", bookPage);
+		model.addAttribute("books", bookPage.getContent());
+		model.addAttribute("keyword", keyword);
+
+		return "book-list";
 	}
-
-	// =========================
-	// Restore Book
-	// =========================
-	@GetMapping("/restore/{id}")
-	public String restoreBook(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-
-		try {
-
-			service.restoreBook(id);
-
-			redirectAttributes.addFlashAttribute("successMessage", "Book restored successfully.");
-
-		} catch (IllegalArgumentException ex) {
-
-			redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-		}
-
-		return "redirect:/book/trash";
-	}
-
-	// =========================
-	// Permanent Delete
-	// =========================
-	@GetMapping("/permanent-delete/{id}")
-	public String permanentDelete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-
-		try {
-
-			service.permanentDelete(id);
-
-			redirectAttributes.addFlashAttribute("successMessage", "Book permanently deleted.");
-
-		} catch (IllegalArgumentException ex) {
-
-			redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-		}
-
-		return "redirect:/book/trash";
-	}
-
 }

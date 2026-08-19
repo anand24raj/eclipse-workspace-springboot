@@ -2,7 +2,6 @@ package com.nt.runner;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,11 @@ import com.nt.repository.IUniversityRepository;
 @Component
 public class UniversityRunner implements CommandLineRunner {
 
-	@Autowired
-	private IUniversityRepository repo;
+	private final IUniversityRepository repo;
+
+	UniversityRunner(IUniversityRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -31,8 +33,8 @@ public class UniversityRunner implements CommandLineRunner {
 			university.setCourses(Arrays.asList(c1, c2));
 
 			savedUniversity = repo.save(university);
-			
-			//service.addUnivCourse(university);
+
+			// service.addUnivCourse(university);
 
 			IO.println("Data inserted successfully");
 
@@ -60,6 +62,3 @@ public class UniversityRunner implements CommandLineRunner {
 		}
 	}
 }
-
-
-

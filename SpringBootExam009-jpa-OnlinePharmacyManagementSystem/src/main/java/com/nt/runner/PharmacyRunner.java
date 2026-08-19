@@ -2,7 +2,6 @@ package com.nt.runner;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,11 @@ import com.nt.repository.MedicineRepository;
 public class PharmacyRunner implements CommandLineRunner
 {
 
-	@Autowired
-	private MedicineRepository repo;
+	private final MedicineRepository repo;
+
+	PharmacyRunner(MedicineRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public void run(String... args) throws Exception

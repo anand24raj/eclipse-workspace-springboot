@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,11 @@ import com.nt.service.EmployeeResumeSevice;
 @Component
 public class EmployeeResumeRunner implements CommandLineRunner {
 
-	@Autowired
-	private EmployeeResumeSevice service;
+	private final EmployeeResumeSevice service;
+
+	EmployeeResumeRunner(EmployeeResumeSevice service) {
+		this.service = service;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

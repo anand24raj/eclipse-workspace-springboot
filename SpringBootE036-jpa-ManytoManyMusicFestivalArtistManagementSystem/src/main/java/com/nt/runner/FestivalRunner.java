@@ -103,19 +103,16 @@ public class FestivalRunner implements CommandLineRunner {
 			case 3 -> {
 				String artistName = IO.readln("Enter Artist Name : ");
 
-				artistRepo.findByArtistName(artistName)
-						.ifPresentOrElse(
-								a -> System.out.println("Artist Found : " + a),
-								() -> System.out.println("Artist Not Found"));
+				artistRepo.findByArtistName(artistName).ifPresentOrElse(a -> System.out.println("Artist Found : " + a),
+						() -> System.out.println("Artist Not Found"));
 			}
 
 			case 4 -> {
 				String festivalName = IO.readln("Enter Festival Name : ");
 
-				festivalRepo.findByFestivalName(festivalName)
-						.ifPresentOrElse(
-								f -> System.out.println("Festival Found : " + f),
-								() -> System.out.println("Festival Not Found"));
+				festivalRepo.findByFestivalName(festivalName).ifPresentOrElse(
+						f -> System.out.println("Festival Found : " + f),
+						() -> System.out.println("Festival Not Found"));
 			}
 
 			case 5 -> {
@@ -123,8 +120,7 @@ public class FestivalRunner implements CommandLineRunner {
 
 				System.out.println("\nArtists performing in " + festivalName + " :");
 
-				artistRepo.findArtistsByFestivalName(festivalName)
-						.forEach(System.out::println);
+				artistRepo.findArtistsByFestivalName(festivalName).forEach(System.out::println);
 			}
 
 			case 6 -> {
@@ -132,8 +128,7 @@ public class FestivalRunner implements CommandLineRunner {
 
 				System.out.println("\nFestivals attended by " + artistName + " :");
 
-				festivalRepo.findFestivalsByArtistName(artistName)
-						.forEach(System.out::println);
+				festivalRepo.findFestivalsByArtistName(artistName).forEach(System.out::println);
 			}
 
 			case 7 -> {

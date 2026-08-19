@@ -1,33 +1,20 @@
 package com.nt.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.nt.entity.Book;
 
 public interface BookService {
 
-	// Save new book
-	Book saveBook(Book book);
+    Book saveBook(Book book);
 
-	// Update existing book
-	Book updateBook(Book book);
+    Page<Book> getAllBooks(int page, int size);
 
-	// Get all active books (deleted = false)
-	List<Book> getActiveBooks();
+    Page<Book> searchBooks(String keyword, int page, int size);
 
-	// Get active book by ID
-	Book getBookById(Long id);
+    Book getBookById(Long id);
 
-	// Soft delete
-	void deleteBook(Long id);
+    Book updateBook(Book book);
 
-	// Get deleted books (Trash)
-	List<Book> getDeletedBooks();
-
-	// Restore deleted book
-	void restoreBook(Long id);
-
-	// Permanently delete
-	void permanentDelete(Long id);
-
+    void deleteBook(Long id);
 }

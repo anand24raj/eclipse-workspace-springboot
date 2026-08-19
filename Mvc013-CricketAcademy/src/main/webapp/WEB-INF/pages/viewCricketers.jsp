@@ -8,19 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>View Cricketers</title>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
+
 </head>
 
 <body>
 
-	<h1 style="color: red; text-align: center;">View Cricketers!</h1>
+	<h1>View Cricketers!</h1>
 
 	<a href="${pageContext.request.contextPath}/addCricketer"> Add
 		Cricketer </a>
 
 	<br>
 	<br>
-	<table
-		style="border: 1px solid black; border-collapse: collapse; width: 500px; margin: auto; text-align: center;">
+	<table>
 
 		<tr>
 			<th>ID</th>

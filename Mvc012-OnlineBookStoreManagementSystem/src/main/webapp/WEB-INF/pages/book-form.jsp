@@ -1,215 +1,164 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>${formTitle}</title>
+
+<title><c:choose>
+		<c:when test="${book.id == null}">
+                Add Book
+            </c:when>
+		<c:otherwise>
+                Edit Book
+            </c:otherwise>
+	</c:choose></title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<style>
-body {
-	background: #f4f6f9;
-}
-
-.container {
-	max-width: 850px;
-	margin-top: 40px;
-}
-
-.card {
-	border-radius: 15px;
-}
-
-.required {
-	color: red;
-}
-
-.error {
-	color: red;
-	font-size: 14px;
-}
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
 
 </head>
 
 <body>
 
-	<div class="container">
+	<div class="book-container">
 
-		<div class="card shadow">
+		<div class="book-card">
 
-			<div class="card-header bg-primary text-white">
-
-				<h3>${formTitle}</h3>
-
+			<div class="book-card-header">
+				<h3>
+					<c:choose>
+						<c:when test="${book.id == null}">
+                        Add New Book
+                    </c:when>
+						<c:otherwise>
+                        Edit Book
+                    </c:otherwise>
+					</c:choose>
+				</h3>
 			</div>
 
-			<div class="card-body">
+			<div class="book-card-body">
+				<c:choose>
 
-				<form:form modelAttribute="book" method="post"
-					action="${formAction}">
+					<c:when test="${book.id == null}">
+						<c:set var="formAction"
+							value="${pageContext.request.contextPath}/book/save" />
+					</c:when>
 
-					<c:if test="${not empty book.id}">
-						<form:hidden path="id" />
-					</c:if>
+					<c:otherwise>
+						<c:set var="formAction"
+							value="${pageContext.request.contextPath}/book/update" />
+					</c:otherwise>
 
-					<div class="row">
+				</c:choose>
 
-						<div class="col-md-6 mb-3">
+				<form:form action="${formAction}" method="post"
+					modelAttribute="book">
 
-							<label class="form-label"> Book Title <span
-								class="required">*</span>
+					<form:hidden path="id" />
 
-							</label>
+					<div class="mb-3">
 
-							<form:input path="title" cssClass="form-control"
-								placeholder="Enter Book Title" />
+						<label class="form-label"> Book Title </label>
 
-							<form:errors path="title" cssClass="error" />
+						<form:input path="title" cssClass="form-control" />
 
-						</div>
-
-						<div class="col-md-6 mb-3">
-
-							<label class="form-label"> Author <span class="required">*</span>
-
-							</label>
-
-							<form:input path="author" cssClass="form-control"
-								placeholder="Enter Author" />
-
-							<form:errors path="author" cssClass="error" />
-
-						</div>
+						<form:errors path="title" cssClass="text-danger" />
 
 					</div>
 
-					<div class="row">
 
-						<div class="col-md-6 mb-3">
+					<div class="mb-3">
 
-							<label class="form-label"> Category <span
-								class="required">*</span>
+						<label class="form-label"> Author Name </label>
 
-							</label>
+						<form:input path="author" cssClass="form-control" />
 
-							<form:select path="category" cssClass="form-select">
-
-								<form:option value="">Select Category</form:option>
-
-								<form:option value="Programming">Programming</form:option>
-
-								<form:option value="Science">Science</form:option>
-
-								<form:option value="History">History</form:option>
-
-								<form:option value="Biography">Biography</form:option>
-
-								<form:option value="Business">Business</form:option>
-
-								<form:option value="Education">Education</form:option>
-
-								<form:option value="Fiction">Fiction</form:option>
-
-								<form:option value="Other">Other</form:option>
-
-							</form:select>
-
-							<form:errors path="category" cssClass="error" />
-
-						</div>
-
-						<div class="col-md-6 mb-3">
-
-							<label class="form-label"> Price <span class="required">*</span>
-
-							</label>
-
-							<form:input path="price" type="number" step="0.01" min="1"
-								cssClass="form-control" placeholder="Enter Price" />
-
-							<form:errors path="price" cssClass="error" />
-
-						</div>
+						<form:errors path="author" cssClass="text-danger" />
 
 					</div>
 
-					<div class="row">
 
-						<div class="col-md-6 mb-3">
+					<div class="mb-3">
 
-							<label class="form-label"> Publisher </label>
+						<label class="form-label"> Category </label>
 
-							<form:input path="publisher" cssClass="form-control"
-								placeholder="Publisher Name" />
+						<form:input path="category" cssClass="form-control" />
 
-						</div>
-
-						<div class="col-md-6 mb-3">
-
-							<label class="form-label"> Published Date <span
-								class="required">*</span>
-
-							</label>
-
-							<form:input path="publishedDate" type="date"
-								cssClass="form-control" />
-
-							<form:errors path="publishedDate" cssClass="error" />
-
-						</div>
+						<form:errors path="category" cssClass="text-danger" />
 
 					</div>
 
-					<div class="row">
 
-						<div class="col-md-6 mb-3">
+					<div class="mb-3">
 
-							<label class="form-label"> Stock Quantity <span
-								class="required">*</span>
+						<label class="form-label"> Price </label>
 
-							</label>
+						<form:input path="price" type="number" step="0.01"
+							cssClass="form-control" />
 
-							<form:input path="stockQuantity" type="number" min="0"
-								cssClass="form-control" placeholder="Enter Stock" />
-
-							<form:errors path="stockQuantity" cssClass="error" />
-
-						</div>
+						<form:errors path="price" cssClass="text-danger" />
 
 					</div>
 
-					<hr>
 
-					<button class="btn btn-success">
+					<div class="mb-3">
+
+						<label class="form-label"> Publisher </label>
+
+						<form:input path="publisher" cssClass="form-control" />
+
+						<form:errors path="publisher" cssClass="text-danger" />
+
+					</div>
+
+
+					<div class="mb-3">
+
+						<label class="form-label"> Published Date </label>
+
+						<form:input path="publishedDate" type="date"
+							cssClass="form-control" />
+
+						<form:errors path="publishedDate" cssClass="text-danger" />
+
+					</div>
+
+
+					<div class="mb-3">
+
+						<label class="form-label"> Stock Quantity </label>
+
+						<form:input path="stockQuantity" type="number"
+							cssClass="form-control" />
+
+						<form:errors path="stockQuantity" cssClass="text-danger" />
+
+					</div>
+
+
+					<button type="submit" class="btn btn-success">
 
 						<c:choose>
-
-							<c:when test="${empty book.id}">
-
-Save Book
-
-</c:when>
-
+							<c:when test="${book.id == null}">
+                            Save Book
+                        </c:when>
 							<c:otherwise>
-
-Update Book
-
-</c:otherwise>
-
+                            Update Book
+                        </c:otherwise>
 						</c:choose>
 
 					</button>
 
-					<a href="<c:url value='/book/list'/>" class="btn btn-secondary">
-
-						Cancel </a>
+					<a href="${pageContext.request.contextPath}/book/list"
+						class="btn btn-secondary"> Cancel </a>
 
 				</form:form>
 
@@ -218,11 +167,6 @@ Update Book
 		</div>
 
 	</div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-		
-	</script>
 
 </body>
 </html>

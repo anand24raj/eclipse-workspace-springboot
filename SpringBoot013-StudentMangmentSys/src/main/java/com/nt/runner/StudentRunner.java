@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +8,11 @@ import com.nt.service.IStudentService;
 @Component
 public class StudentRunner implements CommandLineRunner {
 
-	@Autowired
-	IStudentService iStudentService;
+	final IStudentService iStudentService;
+
+	StudentRunner(IStudentService iStudentService) {
+		this.iStudentService = iStudentService;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +8,11 @@ import com.nt.sbeans.HospitalInfo;
 @Component
 public class TestRunner implements CommandLineRunner
 {
-	@Autowired
-	private HospitalInfo hosp;
+	private final HospitalInfo hosp;
+
+	TestRunner(HospitalInfo hosp) {
+		this.hosp = hosp;
+	}
 
 	@Override
 	public void run(String... args) throws Exception 

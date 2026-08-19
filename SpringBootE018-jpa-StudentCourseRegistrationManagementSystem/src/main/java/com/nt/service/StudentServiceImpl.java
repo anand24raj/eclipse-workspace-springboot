@@ -1,6 +1,5 @@
 package com.nt.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.Student;
@@ -9,8 +8,11 @@ import com.nt.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentRepository repo;
+	private final StudentRepository repo;
+
+	StudentServiceImpl(StudentRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void registerStudent(Student stud) {

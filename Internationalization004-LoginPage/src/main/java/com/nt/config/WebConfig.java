@@ -4,20 +4,32 @@ import java.util.Locale;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
+@ComponentScan("com.nt")
 public class WebConfig implements WebMvcConfigurer {
 
-	/*
-	 * Loads: messages.properties messages_hi.properties messages_fr.properties
-	 */
+	// ==============================
+	// JSP View Resolver
+	// ==============================
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+
+		registry.jsp("/WEB-INF/pages/", ".jsp");
+	}
+
+	// ==============================
+	// Message Source
+	// ==============================
 	@Bean
 	MessageSource messageSource() {
 
@@ -30,9 +42,9 @@ public class WebConfig implements WebMvcConfigurer {
 		return messageSource;
 	}
 
-	/*
-	 * Stores the selected locale in the HTTP session.
-	 */
+	// ==============================
+	// Locale Resolver
+	// ==============================
 	@Bean
 	LocaleResolver localeResolver() {
 
@@ -43,11 +55,9 @@ public class WebConfig implements WebMvcConfigurer {
 		return localeResolver;
 	}
 
-	/*
-	 * Reads language from the lang request parameter.
-	 *
-	 * ?lang=en ?lang=hi ?lang=fr
-	 */
+	// ==============================
+	// Language Change Interceptor
+	// ==============================
 	@Bean
 	LocaleChangeInterceptor localeChangeInterceptor() {
 

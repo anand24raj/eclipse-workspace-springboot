@@ -2,7 +2,6 @@ package com.nt.runner;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +11,11 @@ import com.nt.service.BookService;
 @Component
 public class BookRunner implements CommandLineRunner {
 
-	@Autowired
-	private BookService service;
+	private final BookService service;
+
+	BookRunner(BookService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

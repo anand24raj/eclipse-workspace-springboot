@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.Book;
@@ -11,8 +10,11 @@ import com.nt.repository.BookRepository;
 @Service
 public class BookServiceImpl implements BookService {
 
-	@Autowired
-	BookRepository repo;
+	final BookRepository repo;
+
+	BookServiceImpl(BookRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public Book addBook(Book book) {

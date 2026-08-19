@@ -3,7 +3,6 @@ package com.nt.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.RentalBook;
@@ -12,8 +11,11 @@ import com.nt.repository.RentalBookRepository;
 @Service
 public class RentalBookServiceImpl implements RentalBookService {
 
-	@Autowired
-	RentalBookRepository repo;
+	final RentalBookRepository repo;
+
+	RentalBookServiceImpl(RentalBookRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public RentalBook saveBook(RentalBook book) {

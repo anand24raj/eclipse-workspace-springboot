@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +8,11 @@ import com.nt.service.MovieService;
 @Component
 public class MovieRunner implements CommandLineRunner {
 
-	@Autowired
-	private MovieService service;
+	private final MovieService service;
+
+	MovieRunner(MovieService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

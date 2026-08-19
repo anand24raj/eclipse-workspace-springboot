@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +8,11 @@ import com.nt.sbeans.EmployeeConfig;
 @Component
 public class EmployeeRunner implements CommandLineRunner 
 {
-	@Autowired
-	EmployeeConfig employee;
+	final EmployeeConfig employee;
+
+	 EmployeeRunner(EmployeeConfig employee) {
+        this.employee = employee;
+    }
 
     @Override
     public void run(String... args) throws Exception {

@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,12 +14,11 @@
 
 <title><spring:message code="login.page.title" /></title>
 
-
 <style>
 body {
 	margin: 0;
 	background: #eef2f7;
-	font-family: Arial;
+	font-family: Arial, sans-serif;
 }
 
 .container {
@@ -39,7 +37,7 @@ h1 {
 
 .language-links {
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 }
 
 .language-links a {
@@ -64,6 +62,7 @@ label {
 input {
 	width: 100%;
 	padding: 10px;
+	box-sizing: border-box;
 }
 
 .error {
@@ -72,10 +71,9 @@ input {
 	display: block;
 }
 
-.success {
-	color: green;
-	text-align: center;
-	margin-bottom: 15px;
+.buttons {
+	display: flex;
+	justify-content: space-between;
 }
 
 button {
@@ -97,101 +95,82 @@ button {
 
 </head>
 
-
 <body>
 
-
 	<div class="container">
-
 
 		<h1>
 			<spring:message code="login.heading" />
 		</h1>
 
-
+		<!-- Language Selection -->
 
 		<div class="language-links">
-
 
 			<a href="${pageContext.request.contextPath}/login?lang=en">
 				English </a> <a href="${pageContext.request.contextPath}/login?lang=hi">
 				हिन्दी </a> <a href="${pageContext.request.contextPath}/login?lang=fr">
 				Français </a>
 
-
 		</div>
 
 
-
-		<c:if test="${loginSuccess}">
-
-			<div class="success">Login Successful</div>
-
-		</c:if>
-
-
-
+		<!-- Login Form -->
 
 		<form:form method="post"
 			action="${pageContext.request.contextPath}/login"
 			modelAttribute="loginForm">
 
+			<!-- Global errors -->
 
 			<form:errors path="" cssClass="error" />
 
 
+			<!-- Username -->
 
 			<div class="form-group">
-
 
 				<label> <spring:message code="login.username" />
 				</label>
 
-
 				<form:input path="username" />
 
-
 				<form:errors path="username" cssClass="error" />
-
 
 			</div>
 
 
+			<!-- Password -->
 
 			<div class="form-group">
-
 
 				<label> <spring:message code="login.password" />
 				</label>
 
-
-				<form:password path="password" />
-
+				<form:password path="password"/>
 
 				<form:errors path="password" cssClass="error" />
-
 
 			</div>
 
 
+			<!-- Buttons -->
 
+			<div class="buttons">
 
-			<button type="submit" class="login">
-				<spring:message code="login.button" />
-			</button>
+				<button type="submit" class="login">
+					<spring:message code="login.button" />
+				</button>
 
+				<button type="reset" class="reset">
+					<spring:message code="login.reset" />
+				</button>
 
-			<button type="reset" class="reset">
-				<spring:message code="login.reset" />
-			</button>
-
-
+			</div>
 
 		</form:form>
 
-
 	</div>
-
 
 </body>
 

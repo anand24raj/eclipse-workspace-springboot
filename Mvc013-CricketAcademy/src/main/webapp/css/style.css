@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+/* ===== General Page Styling ===== */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f4f6f8;
+	color: #333;
+}
+
+/* ===== Headings ===== */
+h1 {
+	color: #e53935;
+	text-align: center;
+	margin: 30px 0;
+}
+
+/* ===== Form Container ===== */
+form {
+	width: 450px;
+	margin: 30px auto;
+	padding: 30px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Form text */
+form {
+	font-size: 16px;
+	line-height: 2;
+}
+
+/* ===== Input Fields ===== */
+input[type="text"], input[type="number"] {
+	width: 100%;
+	padding: 10px 12px;
+	margin-top: 5px;
+	border: 1px solid #bbb;
+	border-radius: 5px;
+	font-size: 15px;
+	outline: none;
+	transition: 0.3s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+	border-color: #e53935;
+	box-shadow: 0 0 5px rgba(229, 57, 53, 0.3);
+}
+
+/* ===== Submit Button ===== */
+input[type="submit"] {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	margin-top: 15px;
+	background-color: #e53935;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+	background-color: #c62828;
+}
+
+/* ===== Add Cricketer Link ===== */
+body>a {
+	display: block;
+	width: 150px;
+	margin: 0 auto 20px auto;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #1976d2;
+	color: white;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+body>a:hover {
+	background-color: #0d47a1;
+}
+
+/* ===== Table ===== */
+table {
+	width: 95% !important;
+	max-width: 1100px;
+	margin: 20px auto !important;
+	border-collapse: collapse !important;
+	background-color: white;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header */
+th {
+	background-color: #e53935;
+	color: white;
+	padding: 14px 10px;
+	border: 1px solid #ddd;
+}
+
+/* Table cells */
+td {
+	padding: 12px 10px;
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+/* Alternate rows */
+tr:nth-child(even) {
+	background-color: #f8f8f8;
+}
+
+/* Hover effect */
+tr:hover {
+	background-color: #ffecec;
+}
+
+/* ===== Edit and Delete Links ===== */
+td a {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 4px;
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/* Edit */
+td a[href*="editCricketer"] {
+	background-color: #1976d2;
+}
+
+td a[href*="editCricketer"]:hover {
+	background-color: #0d47a1;
+}
+
+/* Delete */
+td a[href*="deleteCricketer"] {
+	background-color: #d32f2f;
+}
+
+td a[href*="deleteCricketer"]:hover {
+	background-color: #b71c1c;
+}
+
+/* ===== No Cricketers Message ===== */
+td h1 {
+	color: #2e7d32 !important;
+	font-size: 24px;
+}
+
+/* ===== Responsive Design ===== */
+@media ( max-width : 700px) {
+	form {
+		width: 90%;
+		padding: 20px;
+	}
+	table {
+		width: 98% !important;
+		font-size: 13px;
+	}
+	th, td {
+		padding: 8px 5px;
+	}
+	td a {
+		padding: 5px 8px;
+		font-size: 12px;
+	}
+}

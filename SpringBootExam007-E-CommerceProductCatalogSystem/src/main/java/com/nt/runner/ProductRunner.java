@@ -2,7 +2,6 @@ package com.nt.runner;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -13,8 +12,11 @@ import com.nt.service.ProductService;
 @Component
 public class ProductRunner implements CommandLineRunner 
 {
-    @Autowired
-    private ProductService service;
+	private final ProductService service;
+
+	ProductRunner(ProductService service) {
+      this.service = service;
+   }
 
     @Override
     public void run(String... args) throws Exception 

@@ -2,7 +2,6 @@ package com.nt.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.nt.model.LoginForm;
@@ -18,8 +17,14 @@ public class LoginValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "validation.username.required");
+		LoginForm form = (LoginForm) target;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "validation.password.required");
+		if (form.getUsername() == null || form.getUsername().trim().isEmpty()) {
+			errors.rejectValue("username", "validation.username.required");
+		}
+
+		if (form.getPassword() == null || form.getPassword().trim().isEmpty()) {
+			errors.rejectValue("password", "validation.password.required");
+		}
 	}
 }

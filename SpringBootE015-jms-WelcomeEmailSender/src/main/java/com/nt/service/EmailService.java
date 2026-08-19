@@ -1,6 +1,5 @@
 package com.nt.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -9,8 +8,11 @@ import com.nt.entity.Employee;
 
 @Service
 public class EmailService {
-	@Autowired
-	JavaMailSender javaMailSender;
+	final JavaMailSender javaMailSender;
+
+	EmailService(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 
 	public void sendWelcomeMail(Employee employee) {
 		SimpleMailMessage sms = new SimpleMailMessage();

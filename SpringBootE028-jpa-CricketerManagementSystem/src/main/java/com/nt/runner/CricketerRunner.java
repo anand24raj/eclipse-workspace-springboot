@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +9,11 @@ import com.nt.repository.CricketerRepository;
 @Component
 public class CricketerRunner implements CommandLineRunner {
 
-    @Autowired
-    private CricketerRepository repo;
+	private final CricketerRepository repo;
+
+	CricketerRunner(CricketerRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void run(String... args) throws Exception {

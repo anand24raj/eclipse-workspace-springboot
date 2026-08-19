@@ -3,7 +3,6 @@ package com.nt.runner;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,11 @@ import com.nt.repo.DoctorRepository;
 @Component
 public class DoctorRunner implements CommandLineRunner {
 
-	@Autowired
-	private DoctorRepository repo;
+	private final DoctorRepository repo;
+
+	DoctorRunner(DoctorRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

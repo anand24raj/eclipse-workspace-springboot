@@ -1,6 +1,5 @@
 package com.nt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.nt.entity.Student;
@@ -9,8 +8,11 @@ import com.nt.service.StudentService;
 @Controller
 public class StudentController  {
 
-	@Autowired
-	StudentService stdsrv;
+	final StudentService stdsrv;
+
+	StudentController(StudentService stdsrv) {
+		this.stdsrv = stdsrv;
+	}
 	
 	public void registerStudents(Student stud)
 	{

@@ -1,6 +1,5 @@
 package com.nt.runner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +9,11 @@ import com.nt.repository.CustomerOrderRepository;
 @Component
 public class CustomerOrderRunner implements CommandLineRunner {
 
-	@Autowired
-	CustomerOrderRepository repo;
+	final CustomerOrderRepository repo;
+
+	CustomerOrderRunner(CustomerOrderRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

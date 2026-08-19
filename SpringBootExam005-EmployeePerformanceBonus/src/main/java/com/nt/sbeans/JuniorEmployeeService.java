@@ -1,6 +1,5 @@
 package com.nt.sbeans;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +9,11 @@ import com.nt.configuration.EmployeeConfig;
 @Profile("junior")
 public class JuniorEmployeeService implements EmployeeService {
 
-    @Autowired
-	EmployeeConfig employee;
+	final EmployeeConfig employee;
+
+	 JuniorEmployeeService(EmployeeConfig employee) {
+        this.employee = employee;
+    }
     @Override
     public void calculateBonus() {
 

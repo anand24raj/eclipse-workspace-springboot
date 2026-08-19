@@ -2,7 +2,6 @@ package com.nt.controller;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.nt.entity.Product;
@@ -11,8 +10,11 @@ import com.nt.service.IProductService;
 @Controller
 public class ProductController {
 
-    @Autowired
-    private IProductService productService;
+	private final IProductService productService;
+
+	ProductController(IProductService productService) {
+        this.productService = productService;
+    }
 
     public void insertProduct(Product product) {
 

@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.RecipeBook;
@@ -11,8 +10,11 @@ import com.nt.repository.RecipeBookRepository;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-	@Autowired
-	private RecipeBookRepository repo;
+	private final RecipeBookRepository repo;
+
+	RecipeServiceImpl(RecipeBookRepository repo) {
+		this.repo = repo;
+	}
 
 	@Override
 	public String saveRecipe(RecipeBook rBook) {

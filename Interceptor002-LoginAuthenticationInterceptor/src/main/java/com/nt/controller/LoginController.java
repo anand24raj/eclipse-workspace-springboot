@@ -21,7 +21,7 @@ public class LoginController {
 	public String login(@RequestParam String username, @RequestParam String password, HttpSession session,
 			Model model) 
 	{
-		if (username.equals("admin") && "admin123".equals(password)) 
+		if (username.equals("anand") && "anand123".equals(password)) 
 		{
 			session.setAttribute("user", username);
 			session.setAttribute("password", password);

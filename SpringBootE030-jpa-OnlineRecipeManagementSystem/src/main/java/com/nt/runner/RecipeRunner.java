@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,11 @@ import com.nt.service.RecipeService;
 @Component
 public class RecipeRunner implements CommandLineRunner {
 
-	@Autowired
-	private RecipeService service;
+	private final RecipeService service;
+
+	RecipeRunner(RecipeService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

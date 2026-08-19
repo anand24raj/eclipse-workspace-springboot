@@ -33,5 +33,6 @@ public class EmployeeSkillController {
     public String getAllEmployees(Model model) {
     	model.addAttribute("employees", service.getAllEmployees());
     	return "employees";
-    }   
+    }  
+    
 }

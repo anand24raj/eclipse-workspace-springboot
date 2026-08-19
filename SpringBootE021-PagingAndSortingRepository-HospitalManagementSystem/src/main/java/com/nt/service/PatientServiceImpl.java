@@ -2,7 +2,6 @@ package com.nt.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,11 @@ import com.nt.repository.PatientRepository;
 @Service
 public class PatientServiceImpl implements PatientService {
 
-    @Autowired
-    private PatientRepository repo;
+	private final PatientRepository repo;
+
+	PatientServiceImpl(PatientRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public Iterable<Patient> addSinglePatient(List<Patient> pat) {
